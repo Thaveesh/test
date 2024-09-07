@@ -10,7 +10,7 @@
     <!-- AR.js Scene for Web AR -->
     <a-scene embedded arjs='sourceType: webcam;'>
       <!-- Define the marker for the AR content -->
-      <a-marker preset="hiro">
+      <a-marker type='pattern' url='path/to/your/custom-marker.patt'>
         <!-- AR text that will display -->
         <a-text value="Hi friend" position="0 0.1 0" rotation="-90 0 0" color="red"></a-text>
       </a-marker>
