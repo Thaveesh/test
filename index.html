@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR.js Example</title>
-    <!-- Include AR.js library -->
+    <title>Web AR without VR Mode</title>
+    <!-- Include A-Frame and AR.js libraries -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
-    <!-- AR.js Scene -->
-    <a-scene embedded arjs>
-      <!-- Define the QR marker -->
+    <!-- AR.js Scene for Web AR -->
+    <a-scene embedded arjs='sourceType: webcam;'>
+      <!-- Define the marker for the AR content -->
       <a-marker preset="hiro">
-        <!-- Add the text that should appear -->
+        <!-- AR text that will display -->
         <a-text value="Hi friend" position="0 0.1 0" rotation="-90 0 0" color="red"></a-text>
       </a-marker>
-      <!-- Add the camera -->
+      <!-- Add the camera entity to render the AR content -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
+
