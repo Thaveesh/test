@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>3D Animated Text with Hiro Marker</title>
+    <title>Solid 3D Text with Hiro Marker</title>
     <!-- Include A-Frame and AR.js libraries -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
@@ -12,42 +12,18 @@
 
       <!-- Use the default "hiro" marker -->
       <a-marker preset='hiro'>
-        <!-- 3D Text with animation -->
-        <a-entity id="textEntity" text="value: Hi friend; color: red; align: center; width: 4"
-                  position="0 0.1 0" rotation="0 0 0"
-                  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
+        <!-- Solid 3D Text -->
+        <a-entity
+          text="value: Hi friend; align: center; width: 4; color: red;"
+          position="0 0.1 0" 
+          geometry="primitive: box; depth: 0.2; height: 0.5; width: 2"
+          material="color: red; metalness: 0.8; roughness: 0.2;"
+          shadow="cast: true;">
         </a-entity>
       </a-marker>
 
       <!-- Add the camera entity -->
       <a-entity camera></a-entity>
     </a-scene>
-
-    <!-- JavaScript to allow user to rotate the text using arrow keys -->
-    <script>
-      document.addEventListener('keydown', (event) => {
-        const textEntity = document.querySelector('#textEntity');
-        let rotation = textEntity.getAttribute('rotation');
-
-        // Check which key is pressed and modify the rotation accordingly
-        switch (event.key) {
-          case 'ArrowLeft':
-            rotation.y -= 10; // Rotate left
-            break;
-          case 'ArrowRight':
-            rotation.y += 10; // Rotate right
-            break;
-          case 'ArrowUp':
-            rotation.x -= 10; // Rotate up
-            break;
-          case 'ArrowDown':
-            rotation.x += 10; // Rotate down
-            break;
-        }
-
-        // Update the text entity's rotation
-        textEntity.setAttribute('rotation', rotation);
-      });
-    </script>
   </body>
 </html>
