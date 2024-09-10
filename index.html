@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Web AR with 3D Text Control</title>
+    <title>3D Animated Text with Hiro Marker</title>
     <!-- Include A-Frame and AR.js libraries -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
@@ -9,51 +9,45 @@
   <body style="margin: 0; overflow: hidden;">
     <!-- AR.js Scene for Web AR -->
     <a-scene embedded arjs='sourceType: webcam;'>
+
       <!-- Use the default "hiro" marker -->
       <a-marker preset='hiro'>
-        <!-- 3D Text that will display -->
-        <a-entity id="textEntity" text="value: Hi friend; color: red; align: center; width: 4" 
-                  position="0 0.1 0" rotation="-90 0 0" 
-                  geometry="primitive: box; depth: 0.1; height: auto; width: auto;">
+        <!-- 3D Text with animation -->
+        <a-entity id="textEntity" text="value: Hi friend; color: red; align: center; width: 4"
+                  position="0 0.1 0" rotation="0 0 0"
+                  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
         </a-entity>
       </a-marker>
+
       <!-- Add the camera entity -->
       <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- JavaScript to control the position of the text -->
+    <!-- JavaScript to allow user to rotate the text using arrow keys -->
     <script>
-      // Listen for key presses to move the text
-      document.addEventListener('keydown', function(event) {
+      document.addEventListener('keydown', (event) => {
         const textEntity = document.querySelector('#textEntity');
-        let position = textEntity.getAttribute('position');
+        let rotation = textEntity.getAttribute('rotation');
 
-        switch(event.key) {
-          case 'ArrowUp':
-            position.y += 0.1;  // Move up
-            break;
-          case 'ArrowDown':
-            position.y -= 0.1;  // Move down
-            break;
+        // Check which key is pressed and modify the rotation accordingly
+        switch (event.key) {
           case 'ArrowLeft':
-            position.x -= 0.1;  // Move left
+            rotation.y -= 10; // Rotate left
             break;
           case 'ArrowRight':
-            position.x += 0.1;  // Move right
+            rotation.y += 10; // Rotate right
             break;
-          case '+':
-            position.z -= 0.1;  // Move closer
+          case 'ArrowUp':
+            rotation.x -= 10; // Rotate up
             break;
-          case '-':
-            position.z += 0.1;  // Move farther
+          case 'ArrowDown':
+            rotation.x += 10; // Rotate down
             break;
         }
-        
-        // Update the position of the text entity
-        textEntity.setAttribute('position', position);
+
+        // Update the text entity's rotation
+        textEntity.setAttribute('rotation', rotation);
       });
     </script>
   </body>
 </html>
-
-
